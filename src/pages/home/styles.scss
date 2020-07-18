@@ -1,0 +1,17 @@
+.root {
+  flex-grow: 1;
+}
+
+.paper_table {
+  padding: 10px;
+  text-align: center;
+  background: #1c3643;
+  color: white;
+  border-radius: 3px;
+  font-family: 'Quicksand';
+}
+
+.container_table {
+  max-height: 440px;
+  overflow-y: scroll;
+}

@@ -1,0 +1,37 @@
+.container {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  box-sizing: border-box;
+  font-family: 'Quicksand';
+}
+
+.list {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  background-color: #eeeeee;
+  background-size: 68%, auto;
+  border-bottom-left-radius: 24px;
+  padding: 0px 24px;
+  box-sizing: border-box;
+  height: 65px;
+  color: #111;
+}
+
+.insideList {
+  display: flex;
+}
+
+.itemList {
+  padding-right: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ol,
+ul {
+  list-style: none;
+}
