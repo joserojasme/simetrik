@@ -10,9 +10,9 @@ import { withStyles } from '@material-ui/styles'
 import PropTypes from 'prop-types'
 import * as Amplify from '../../network/cognitoAWS'
 import Alerts, { ERROR, ALERT_SUCCESS } from '../../components/alerts'
-import { useStyles } from './styles'
 import LabelTitle from '../../components/labelTitles'
 import SpinnerModal from '../../components/spinner'
+import './styles.scss'
 
 const initialState = {
   username: 'JOSEROJASME',
@@ -77,19 +77,18 @@ class Login extends Component {
 	}
 
 	render() {
-	  const { classes } = this.props
 	  const { username, password } = this.state
 
 	  return (
 	    <div>
 	      <Container component="main" maxWidth="xs">
 	        <CssBaseline />
-	        <div className={classes.paper}>
+	        <div className='paper'>
 	          <Alerts />
-	          <Avatar className={classes.avatar}>
+	          <Avatar className='avatar'>
 	            <LockOutlinedIcon />
 	          </Avatar>
-	          <LabelTitle text="Simetrik test" />
+	          <LabelTitle text="SIMETRIK TEST" />
 	          <form onSubmit={this.handleSubmit}>
 	            <TextField
 	              variant="outlined"
@@ -121,7 +120,7 @@ class Login extends Component {
 	              fullWidth
 	              variant="contained"
 	              color="primary"
-	              className={classes.submit}>
+	              className='submit'>
 								Iniciar Sesión
 	            </Button>
 	          </form>
@@ -133,8 +132,4 @@ class Login extends Component {
 	}
 }
 
-Login.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(useStyles)(Login)
+export default Login

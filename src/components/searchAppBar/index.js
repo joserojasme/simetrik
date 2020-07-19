@@ -1,5 +1,5 @@
 import AppBarSearch from './appBarSearch'
-import { fetchMovies } from '../../store/actions'
+// import { fetchMovies } from '../../store/actions'
 import { connect } from 'react-redux'
 
 const mapStateToProps = state => ({
@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setMovie: fetchMovies(dispatch)
+  // setMovie: fetchMovies(dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppBarSearch)

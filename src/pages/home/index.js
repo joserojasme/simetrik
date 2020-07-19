@@ -2,10 +2,10 @@ import React from 'react'
 import Home from './home'
 import { connect } from 'react-redux'
 import {
-  fetchMovies,
-  fetchMoviesDetail,
-  fetchSuggestMovies,
-  fetchFavoritesMovies
+  fetchConciliaciones,
+  fetchFuentes,
+  fetchTableros,
+  fetchUsuarios
 } from '../../store/actions'
 import { withAuthenticator } from 'aws-amplify-react'
 import Login from '../login'
@@ -15,10 +15,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setMovies: fetchMovies(dispatch),
-  setMovie: fetchMoviesDetail(dispatch),
-  setSuggestMovies: fetchSuggestMovies(dispatch),
-  setFavoritesMovies: fetchFavoritesMovies(dispatch)
+  setConciliaciones: fetchConciliaciones(dispatch),
+  setFuentes: fetchFuentes(dispatch),
+  setTableros: fetchTableros(dispatch),
+  setUsuarios: fetchUsuarios(dispatch)
 })
 
 export default withAuthenticator(

@@ -1,33 +1,21 @@
 import {
   SET_IS_LOADING,
-  SET_MOVIES,
-  SET_MOVIE_BY_ID,
   SET_DATA_ALERT,
-  SET_SUGGEST_MOVIES,
-  SET_FAVORITES_MOVIES
+  SET_CONCILIACIONES,
+  SET_FUENTES,
+  SET_TABLEROS,
+  SET_USUARIOS
 } from './actionsTypes'
-import { getMovies, getMovieById, getSuggestMovies } from '../network/api'
-
-const nameStorageFavorites = 'favoritesMovies'
+import {
+  getConciliaciones,
+  getFuentes,
+  getTableros,
+  getUsuarios
+} from '../network/api'
 
 export const setIsLoading = isLoading => ({
   type: SET_IS_LOADING,
   isLoading
-})
-
-const setSuggestMovies = suggestMovies => ({
-  type: SET_SUGGEST_MOVIES,
-  suggestMovies
-})
-
-const setMovies = movies => ({
-  type: SET_MOVIES,
-  movies
-})
-
-const setMovie = movieDetail => ({
-  type: SET_MOVIE_BY_ID,
-  movieDetail
 })
 
 export const setDataAlert = dataAlert => ({
@@ -35,46 +23,69 @@ export const setDataAlert = dataAlert => ({
   dataAlert
 })
 
-const setFavoritesMovies = favoritesMovies => ({
-  type: SET_FAVORITES_MOVIES,
-  favoritesMovies
+const setConciliaciones = conciliaciones => ({
+  type: SET_CONCILIACIONES,
+  conciliaciones
 })
 
-// thunks
-export const fetchSuggestMovies = dispatch => async (page) => {
-  let suggestMovies
-  const arrayPages = [1, 2, 3, 4, 5]
+const setFuentes = fuentes => ({
+  type: SET_FUENTES,
+  fuentes
+})
+
+const setTableros = tableros => ({
+  type: SET_TABLEROS,
+  tableros
+})
+
+const setUsuarios = usuarios => ({
+  type: SET_USUARIOS,
+  usuarios
+})
+
+// redux thunks
+export const fetchConciliaciones = dispatch => async () => {
   dispatch(setIsLoading(true))
-  if (!page) {
-    arrayPages.forEach(async element => {
-      suggestMovies = await getSuggestMovies(element)
-      dispatch(setSuggestMovies(suggestMovies.Search))
-    })
+  const conciliaciones = await getConciliaciones()
+  if (conciliaciones.status === HTTP_REQUEST_OK) {
+    dispatch(setConciliaciones(conciliaciones.data))
   } else {
-    suggestMovies = await getSuggestMovies(page)
-    dispatch(setSuggestMovies(suggestMovies.Search))
+    dispatch(setConciliaciones([]))
   }
   dispatch(setIsLoading(false))
-
 }
 
-export const fetchMovies = dispatch => async (title) => {
-  const movies = await getMovies(title)
-  if (movies.Response === 'True') {
-    dispatch(setMovies(movies.Search))
-  } else {
-    dispatch(setMovies([]))
-  }
-}
-
-export const fetchMoviesDetail = dispatch => async imdbID => {
+export const fetchFuentes = dispatch => async () => {
   dispatch(setIsLoading(true))
-  const movie = await getMovieById(imdbID)
-  dispatch(setMovie(movie))
+  const fuentes = await getFuentes()
+  if (fuentes.status === HTTP_REQUEST_OK) {
+    dispatch(setFuentes(fuentes.data))
+  } else {
+    dispatch(setFuentes([]))
+  }
   dispatch(setIsLoading(false))
 }
 
-export const fetchFavoritesMovies = dispatch => async () => {
-  const favoritesMovies = await JSON.parse(localStorage.getItem(nameStorageFavorites))
-  dispatch(setFavoritesMovies(favoritesMovies))
+export const fetchTableros = dispatch => async () => {
+  dispatch(setIsLoading(true))
+  const tableros = await getTableros()
+  if (tableros.status === HTTP_REQUEST_OK) {
+    dispatch(setTableros(tableros.data))
+  } else {
+    dispatch(setTableros([]))
+  }
+  dispatch(setIsLoading(false))
 }
+
+export const fetchUsuarios = dispatch => async () => {
+  dispatch(setIsLoading(true))
+  const usuarios = await getUsuarios()
+  if (usuarios.status === HTTP_REQUEST_OK) {
+    dispatch(setUsuarios(usuarios.data))
+  } else {
+    dispatch(setUsuarios([]))
+  }
+  dispatch(setIsLoading(false))
+}
+
+const HTTP_REQUEST_OK = 200

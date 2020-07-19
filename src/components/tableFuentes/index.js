@@ -6,33 +6,6 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import React from 'react'
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein }
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9)
-]
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
@@ -40,32 +13,35 @@ const useStyles = makeStyles({
   }
 })
 
-export default function TableFuentes() {
+export default function TableFuentes({ data }) {
   const classes = useStyles()
 
   return (
     <Table className={classes.table} aria-label="customized table">
       <TableHead>
         <TableRow>
-          <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-          <StyledTableCell align="right">Calories</StyledTableCell>
-          <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-          <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-          <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+          <StyledTableCell>id</StyledTableCell>
+          <StyledTableCell>Company</StyledTableCell>
+          <StyledTableCell>Name</StyledTableCell>
+          <StyledTableCell>CreateAt</StyledTableCell>
+          <StyledTableCell>Description</StyledTableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows.map(row => (
-          <StyledTableRow key={row.name}>
-            <StyledTableCell component="th" scope="row">
-              {row.name}
-            </StyledTableCell>
-            <StyledTableCell align="right">{row.calories}</StyledTableCell>
-            <StyledTableCell align="right">{row.fat}</StyledTableCell>
-            <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-            <StyledTableCell align="right">{row.protein}</StyledTableCell>
-          </StyledTableRow>
-        ))}
+        {data.length > 0 &&
+          data.map(row => (
+            <StyledTableRow key={row._id}>
+              <StyledTableCell component="th" scope="row">
+                {`${row._id.substring(row._id.length - 8, row._id.length)}...`}
+              </StyledTableCell>
+              <StyledTableCell>{row.company}</StyledTableCell>
+              <StyledTableCell>{row.name}</StyledTableCell>
+              <StyledTableCell>{row.timestamp.createdAt}</StyledTableCell>
+              <StyledTableCell>
+                {`${row.description.substring(0, 100)}...`}
+              </StyledTableCell>
+            </StyledTableRow>
+          ))}
       </TableBody>
     </Table>
   )
@@ -88,3 +64,5 @@ const StyledTableRow = withStyles(theme => ({
     }
   }
 }))(TableRow)
+
+/* eslint no-underscore-dangle: 0 */

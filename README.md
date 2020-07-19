@@ -1,6 +1,6 @@
-# simetrick
+# simetrik
 
-gfi movies tiene seguridad con un login que se valida contra un grupo de usuarios de AWS cognito, por favor inicie sesión con el usuario: JOSEROJASME y contraseña: JOSE1234
+simetrik tiene seguridad con un login que se valida contra un grupo de usuarios de AWS cognito, por favor inicie sesión con el usuario: JOSEROJASME y contraseña: JOSE1234
 
 En el proyecto se trabajó con componentes de clase, función y hooks.
 
