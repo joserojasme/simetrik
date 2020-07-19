@@ -1,4 +1,4 @@
-import { SET_TABLEROS } from '../actionsTypes'
+import { SET_TABLEROS, SET_IS_LOADING_TABLEROS } from '../actionsTypes'
 import { getTableros } from '../../network/api'
 import { filtrarPorTexto } from '../../core/tableros/filters'
 
@@ -7,8 +7,14 @@ const setTableros = tableros => ({
   tableros
 })
 
+const setIsLoading = isLoadingTableros => ({
+  type: SET_IS_LOADING_TABLEROS,
+  isLoadingTableros
+})
+
 // redux thunks
 export const fetchTableros = (texto = '') => async dispatch => {
+  await dispatch(setIsLoading(true))
   const tableros = await getTableros()
   if (tableros.status === HTTP_REQUEST_OK) {
     if (texto.length === 0) {
@@ -16,8 +22,10 @@ export const fetchTableros = (texto = '') => async dispatch => {
     } else {
       dispatch(setTableros(filtrarPorTexto(texto, tableros.data)))
     }
+    await dispatch(setIsLoading(false))
   } else {
     dispatch(setTableros([]))
+    await dispatch(setIsLoading(false))
   }
 }
 

@@ -21,16 +21,27 @@ function AppBarSearch(props) {
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
-  const handleSubmit = event => {
-    event.preventDefault()
+  const handleChange = (event) => {
+    setTitleSearch(event.target.value)
+    if (event.target.value.length === 0) {
+      handleClick()
+    }
   }
 
-  const handleChange = (event) => {
-    props.setConciliaciones(event.target.value)
-    props.setFuentes(event.target.value)
-    props.setTableros(event.target.value)
-    props.setUsuarios(event.target.value)
-    setTitleSearch(event.target.value)
+  const handleClick = () => {
+    props.setConciliaciones(titleSearch)
+    props.setFuentes(titleSearch)
+    props.setTableros(titleSearch)
+    props.setUsuarios(titleSearch)
+  }
+
+  const onKeyPress = event => {
+    if (event.key === 'Enter') {
+      props.setConciliaciones(titleSearch)
+      props.setFuentes(titleSearch)
+      props.setTableros(titleSearch)
+      props.setUsuarios(titleSearch)
+    }
   }
 
   const handleProfileMenuOpen = event => {
@@ -76,25 +87,37 @@ function AppBarSearch(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Thunks
+            Simetrik
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
+              {titleSearch.length === 0 &&
+                <SearchIcon />
+              }
             </div>
-            <form onSubmit={handleSubmit}>
+            <InputBase
+              placeholder="Buscar..."
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              value={titleSearch}
+              inputProps={{ 'aria-label': 'search' }}
+              onKeyPress={onKeyPress}
+              onChange={handleChange}
+              autoFocus
+            />
+            {titleSearch.length > 0 &&
               <InputBase
-                placeholder="Buscar..."
                 classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
+                  root: classes.buttonSearch,
                 }}
-                value={titleSearch}
+                value='Buscar '
                 inputProps={{ 'aria-label': 'search' }}
-                onChange={handleChange}
-                autoFocus
+                type='button'
+                onClick={handleClick}
               />
-            </form>
+            }
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

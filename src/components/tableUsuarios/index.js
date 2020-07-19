@@ -20,34 +20,39 @@ export default function TableUsuarios({ data }) {
   const classes = useStyles()
 
   return (
-    <Table className={classes.table} aria-label="customized table">
-      <TableHead>
-        <TableRow>
-          <StyledTableCell>id</StyledTableCell>
-          <StyledTableCell>FirstName</StyledTableCell>
-          <StyledTableCell>LastName</StyledTableCell>
-          <StyledTableCell>Gender</StyledTableCell>
-          <StyledTableCell>Phone</StyledTableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {data.length > 0 &&
-          data.map(row => (
-            <StyledTableRow key={row._id}>
-              <StyledTableCell component="th" scope="row">
-                {`${row._id.substring(row._id.length - 8, row._id.length)}...`}
-              </StyledTableCell>
-              <StyledTableCell>{row.name.firstName}</StyledTableCell>
-              <StyledTableCell>{row.name.lastName}</StyledTableCell>
-              <StyledTableCell>{row.gender}</StyledTableCell>
-              <StyledTableCell>{row.phone}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        {data.length === 0 && (
-          <span className={classes.span}>No hay resultados</span>
-        )}
-      </TableBody>
-    </Table>
+    <>
+      <Table className={classes.table} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>id</StyledTableCell>
+            <StyledTableCell>FirstName</StyledTableCell>
+            <StyledTableCell>LastName</StyledTableCell>
+            <StyledTableCell>Gender</StyledTableCell>
+            <StyledTableCell>Phone</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.length > 0 &&
+            data.map(row => (
+              <StyledTableRow key={row._id}>
+                <StyledTableCell component="th" scope="row">
+                  {`${row._id.substring(
+                    row._id.length - 8,
+                    row._id.length
+                  )}...`}
+                </StyledTableCell>
+                <StyledTableCell>{row.name.firstName}</StyledTableCell>
+                <StyledTableCell>{row.name.lastName}</StyledTableCell>
+                <StyledTableCell>{row.gender}</StyledTableCell>
+                <StyledTableCell>{row.phone}</StyledTableCell>
+              </StyledTableRow>
+            ))}
+        </TableBody>
+      </Table>
+      {data.length === 0 && (
+        <div className={classes.span}>No hay resultados</div>
+      )}
+    </>
   )
 }
 

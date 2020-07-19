@@ -4,7 +4,11 @@ import {
   SET_CONCILIACIONES,
   SET_FUENTES,
   SET_TABLEROS,
-  SET_USUARIOS
+  SET_USUARIOS,
+  SET_IS_LOADING_CONCILIACIONES,
+  SET_IS_LOADING_FUENTES,
+  SET_IS_LOADING_TABLEROS,
+  SET_IS_LOADING_USUARIOS
 } from './actionsTypes'
 
 const initialState = {
@@ -13,7 +17,11 @@ const initialState = {
   conciliaciones: [],
   fuentes: [],
   tableros: [],
-  usuarios: []
+  usuarios: [],
+  isLoadingConciliaciones: false,
+  isLoadingFuentes: false,
+  isLoadingTableros: false,
+  isLoadingUsuarios: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +55,26 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       usuarios: action.usuarios
+    }
+  case SET_IS_LOADING_CONCILIACIONES:
+    return {
+      ...state,
+      isLoadingConciliaciones: action.isLoadingConciliaciones
+    }
+  case SET_IS_LOADING_FUENTES:
+    return {
+      ...state,
+      isLoadingFuentes: action.isLoadingFuentes
+    }
+  case SET_IS_LOADING_TABLEROS:
+    return {
+      ...state,
+      isLoadingTableros: action.isLoadingTableros
+    }
+  case SET_IS_LOADING_USUARIOS:
+    return {
+      ...state,
+      isLoadingUsuarios: action.isLoadingUsuarios
     }
   default:
     return state

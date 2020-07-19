@@ -9,7 +9,7 @@ import Usuarios from '../../components/tableUsuarios'
 import './styles.scss'
 
 function Home(props) {
-  const { conciliaciones, fuentes, tableros, usuarios } = props
+  const { conciliaciones, fuentes, tableros, usuarios, isLoadingConciliaciones, isLoadingFuentes, isLoadingTableros, isLoadingUsuarios } = props
   useEffect(() => {
     props.setConciliaciones()
     props.setFuentes()
@@ -44,16 +44,20 @@ function Home(props) {
             </div>
           </Grid>
           <Grid className='container_table' item xs={6} sm={3}>
-            <Conciliaciones data={conciliaciones} />
+            {!isLoadingConciliaciones && <Conciliaciones data={conciliaciones} />}
+            {isLoadingConciliaciones && <img src='./loading.gif' alt='loading' />}
           </Grid>
           <Grid className='container_table' item xs={6} sm={3}>
-            <Fuentes data={fuentes} />
+            {!isLoadingFuentes && <Fuentes data={fuentes} />}
+            {isLoadingFuentes && <img src='./loading.gif' alt='loading' />}
           </Grid>
           <Grid className='container_table' item xs={6} sm={3}>
-            <Tableros data={tableros} />
+            {!isLoadingTableros && <Tableros data={tableros} />}
+            {isLoadingTableros && <img src='./loading.gif' alt='loading' />}
           </Grid>
           <Grid className='container_table' item xs={6} sm={3}>
-            <Usuarios data={usuarios} />
+            {!isLoadingUsuarios && <Usuarios data={usuarios} />}
+            {isLoadingUsuarios && <img src='./loading.gif' alt='loading' />}
           </Grid>
         </Grid>
       </div>
