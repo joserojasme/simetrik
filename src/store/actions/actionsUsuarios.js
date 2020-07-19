@@ -1,6 +1,6 @@
 import { SET_USUARIOS, SET_IS_LOADING_USUARIOS } from '../actionsTypes'
 import { getUsuarios } from '../../network/api'
-import { filtrarPorTexto } from '../../core/usuarios/filters'
+import { filtrarPorTexto, filtrarPorFecha } from '../../core/usuarios/filters'
 
 const setUsuarios = usuarios => ({
   type: SET_USUARIOS,
@@ -13,14 +13,20 @@ const setIsLoading = isLoadingUsuarios => ({
 })
 
 // redux thunks
-export const fetchUsuarios = (texto = '') => async dispatch => {
+export const fetchUsuarios = (texto = '', fecha = '') => async dispatch => {
   await dispatch(setIsLoading(true))
   const usuarios = await getUsuarios()
   if (usuarios.status === HTTP_REQUEST_OK) {
-    if (texto.length === 0) {
+    if (texto.length === 0 && fecha.length === 0) {
       dispatch(setUsuarios(usuarios.data))
     } else {
-      dispatch(setUsuarios(filtrarPorTexto(texto, usuarios.data)))
+      if (texto.length > 0) {
+        dispatch(setUsuarios(filtrarPorTexto(texto, usuarios.data)))
+      }
+
+      if (fecha.length > 0) {
+        dispatch(setUsuarios(filtrarPorFecha(fecha, usuarios.data)))
+      }
     }
     await dispatch(setIsLoading(false))
   } else {

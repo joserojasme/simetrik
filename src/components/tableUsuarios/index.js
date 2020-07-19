@@ -4,12 +4,14 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import React from 'react'
+import React, { useState } from 'react'
+import Button from '@material-ui/core/Button'
+import Dialog from '../dialog'
 
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
-    maxHeight: 440
+    maxHeight: 400
   },
   span: {
     fontFamily: 'Quicksand'
@@ -18,16 +20,23 @@ const useStyles = makeStyles({
 
 export default function TableUsuarios({ data }) {
   const classes = useStyles()
+  const [open, setOpen] = useState(false)
+  const [itemDetalle, setItemDetalle] = useState({})
+
+  const handleClickOpen = value => {
+    setItemDetalle(value)
+    setOpen(true)
+  }
 
   return (
     <>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
+            <StyledTableCell>Acción</StyledTableCell>
             <StyledTableCell>id</StyledTableCell>
             <StyledTableCell>FirstName</StyledTableCell>
             <StyledTableCell>LastName</StyledTableCell>
-            <StyledTableCell>Gender</StyledTableCell>
             <StyledTableCell>Phone</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -35,6 +44,14 @@ export default function TableUsuarios({ data }) {
           {data.length > 0 &&
             data.map(row => (
               <StyledTableRow key={row._id}>
+                <StyledTableCell>
+                  <Button
+                    variant="contained"
+                    onClick={() => handleClickOpen(row)}
+                    color="secondary">
+                    Ver
+                  </Button>
+                </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
                   {`${row._id.substring(
                     row._id.length - 8,
@@ -43,7 +60,6 @@ export default function TableUsuarios({ data }) {
                 </StyledTableCell>
                 <StyledTableCell>{row.name.firstName}</StyledTableCell>
                 <StyledTableCell>{row.name.lastName}</StyledTableCell>
-                <StyledTableCell>{row.gender}</StyledTableCell>
                 <StyledTableCell>{row.phone}</StyledTableCell>
               </StyledTableRow>
             ))}
@@ -51,6 +67,9 @@ export default function TableUsuarios({ data }) {
       </Table>
       {data.length === 0 && (
         <div className={classes.span}>No hay resultados</div>
+      )}
+      {open && (
+        <Dialog open={open} onClick={() => setOpen(false)} data={itemDetalle} />
       )}
     </>
   )

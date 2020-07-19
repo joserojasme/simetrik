@@ -1,4 +1,8 @@
-import { filtrarPorTextoTags, removeDuplicates } from '../utils/utilsFunctions'
+import {
+  filtrarPorTextoTags,
+  removeDuplicates,
+  removeGuion
+} from '../utils/utilsFunctions'
 
 const fieldsFuentes = ['_id', 'name', 'company', 'description']
 
@@ -15,6 +19,13 @@ export const filtrarPorTexto = (texto, arrayData) => {
         }
       })
     })
+  })
+  return removeDuplicates(newData)
+}
+
+export const filtrarPorFecha = (fecha, arrayData) => {
+  const newData = arrayData.filter(item => {
+    return removeGuion(item.timestamp.createdAt) >= removeGuion(fecha)
   })
   return removeDuplicates(newData)
 }

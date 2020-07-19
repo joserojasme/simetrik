@@ -11,3 +11,7 @@ export const removeDuplicates = data => {
   )
   return newData
 }
+
+export const removeGuion = value => {
+  return value.replace(/-/g, '')
+}

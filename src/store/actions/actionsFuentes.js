@@ -1,6 +1,6 @@
 import { SET_FUENTES, SET_IS_LOADING_FUENTES } from '../actionsTypes'
 import { getFuentes } from '../../network/api'
-import { filtrarPorTexto } from '../../core/fuentes/filters'
+import { filtrarPorTexto, filtrarPorFecha } from '../../core/fuentes/filters'
 
 const setFuentes = fuentes => ({
   type: SET_FUENTES,
@@ -13,14 +13,20 @@ const setIsLoading = isLoadingFuentes => ({
 })
 
 // redux thunks
-export const fetchFuentes = (texto = '') => async dispatch => {
+export const fetchFuentes = (texto = '', fecha = '') => async dispatch => {
   await dispatch(setIsLoading(true))
   const fuentes = await getFuentes()
   if (fuentes.status === HTTP_REQUEST_OK) {
-    if (texto.length === 0) {
+    if (texto.length === 0 && fecha.length === 0) {
       dispatch(setFuentes(fuentes.data))
     } else {
-      dispatch(setFuentes(filtrarPorTexto(texto, fuentes.data)))
+      if (texto.length > 0) {
+        dispatch(setFuentes(filtrarPorTexto(texto, fuentes.data)))
+      }
+
+      if (fecha.length > 0) {
+        dispatch(setFuentes(filtrarPorFecha(fecha, fuentes.data)))
+      }
     }
     await dispatch(setIsLoading(false))
   } else {

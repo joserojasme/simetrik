@@ -1,16 +1,3 @@
-import React from 'react'
-import TextField from '@material-ui/core/TextField'
+import TextField from './textField'
 
-export default function TextInput() {
-  return (
-    <>
-      <TextField
-        required
-        fullWidth
-        id="username"
-        name="user"
-        autoComplete="off"
-      />
-    </>
-  )
-}
+export default TextField

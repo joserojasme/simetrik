@@ -2,16 +2,19 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import './styles.scss'
 
-export default function InputDate() {
+export default function InputDate(props) {
+  const { value, onChange, name } = props
   return (
     <TextField
-      id="date"
+      id={name}
+      name={name}
       type="date"
-      defaultValue="2020-07-18"
       className="input-date"
       InputLabelProps={{
         shrink: true
       }}
+      value={value}
+      onChange={onChange}
     />
   )
 }

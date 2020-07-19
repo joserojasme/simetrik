@@ -21,25 +21,18 @@ const DialogActions = withStyles(theme => ({
 }))(MuiDialogActions)
 
 function DialogDetail(props) {
-  const {movieDetail, open, onClick} = props
+  const { data, open, onClick } = props
   return (
     <div>
-      <Dialog onClose={()=>onClick()} aria-labelledby="customized-dialog-title" open={open}>
-        <MuiDialogTitle id="customized-dialog-title" onClose={()=>onClick()}>
-          {movieDetail.Title}
+      <Dialog onClose={() => onClick()} aria-labelledby="customized-dialog-title" open={open}>
+        <MuiDialogTitle id="customized-dialog-title" onClose={() => onClick()}>
+          {data._id}
         </MuiDialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>{movieDetail.Plot}</Typography>
-          <Typography gutterBottom>{`Fecha de Lanzamiento: ${movieDetail.Released}`}</Typography>
-          <Typography gutterBottom>{`Duración: ${movieDetail.Runtime}`}</Typography>
-          <Typography gutterBottom>{`Género ${movieDetail.Genre}`}</Typography>
-          <Typography gutterBottom>{`Director ${movieDetail.Director}`}</Typography>
-          <Typography gutterBottom>{`Escritor ${movieDetail.Writer}`}</Typography>
-          <Typography gutterBottom>{`Reparto ${movieDetail.Actors}`}</Typography>
-          <Typography gutterBottom>{`Idioma ${movieDetail.Language}`}</Typography>
+          <Typography gutterBottom>{`Description: ${data.description}`}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={()=>onClick()} color="primary">
+          <Button autoFocus onClick={() => onClick()} color="primary">
             CERRAR
           </Button>
         </DialogActions>

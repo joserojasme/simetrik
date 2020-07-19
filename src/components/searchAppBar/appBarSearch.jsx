@@ -10,14 +10,13 @@ import SearchIcon from '@material-ui/icons/Search'
 import React, { useState } from 'react'
 import * as Amplify from '../../network/cognitoAWS'
 import { useStyles } from './styles'
+import Button from '@material-ui/core/Button'
 
 function AppBarSearch(props) {
-
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
   const [titleSearch, setTitleSearch] = useState('')
-
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
@@ -28,7 +27,7 @@ function AppBarSearch(props) {
     }
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     props.setConciliaciones(titleSearch)
     props.setFuentes(titleSearch)
     props.setTableros(titleSearch)
@@ -108,15 +107,7 @@ function AppBarSearch(props) {
               autoFocus
             />
             {titleSearch.length > 0 &&
-              <InputBase
-                classes={{
-                  root: classes.buttonSearch,
-                }}
-                value='Buscar '
-                inputProps={{ 'aria-label': 'search' }}
-                type='button'
-                onClick={handleClick}
-              />
+              <Button onClick={handleClick} variant="contained" color="secondary">Buscar</Button>
             }
           </div>
           <div className={classes.grow} />

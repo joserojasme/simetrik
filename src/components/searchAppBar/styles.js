@@ -40,10 +40,6 @@ export const useStyles = makeStyles(theme => ({
   inputRoot: {
     color: 'inherit'
   },
-  buttonSearch: {
-    cursor: 'pointer',
-    color: 'inherit'
-  },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
     transition: theme.transitions.create('width'),
