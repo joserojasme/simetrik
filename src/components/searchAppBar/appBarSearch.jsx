@@ -26,8 +26,11 @@ function AppBarSearch(props) {
   }
 
   const handleChange = (event) => {
+    props.setConciliaciones(event.target.value)
+    props.setFuentes(event.target.value)
+    props.setTableros(event.target.value)
+    props.setUsuarios(event.target.value)
     setTitleSearch(event.target.value)
-    props.setMovie(event.target.value)
   }
 
   const handleProfileMenuOpen = event => {
@@ -73,7 +76,7 @@ function AppBarSearch(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Simetrik test
+            Thunks
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

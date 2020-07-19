@@ -1,12 +1,10 @@
 import React from 'react'
 import Home from './home'
 import { connect } from 'react-redux'
-import {
-  fetchConciliaciones,
-  fetchFuentes,
-  fetchTableros,
-  fetchUsuarios
-} from '../../store/actions'
+import { fetchConciliaciones } from '../../store/actions/actionsConciliaciones'
+import { fetchFuentes } from '../../store/actions/actionsFuentes'
+import { fetchTableros } from '../../store/actions/actionsTableros'
+import { fetchUsuarios } from '../../store/actions/actionsUsuarios'
 import { withAuthenticator } from 'aws-amplify-react'
 import Login from '../login'
 
@@ -15,10 +13,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setConciliaciones: fetchConciliaciones(dispatch),
-  setFuentes: fetchFuentes(dispatch),
-  setTableros: fetchTableros(dispatch),
-  setUsuarios: fetchUsuarios(dispatch)
+  setConciliaciones: item => dispatch(fetchConciliaciones(item)),
+  setFuentes: item => dispatch(fetchFuentes(item)),
+  setTableros: item => dispatch(fetchTableros(item)),
+  setUsuarios: item => dispatch(fetchUsuarios(item))
 })
 
 export default withAuthenticator(

@@ -3,36 +3,36 @@ import config from '../../config/constants'
 
 const request = axios.create({ baseURL: config.baseURL })
 
-export const getConciliaciones = async () => {
+export const getConciliaciones = () => {
   try {
-    const data = await request('conciliaciones.json')
+    const data = request('conciliaciones.json')
     return data
   } catch (error) {
     return error.response
   }
 }
 
-export const getFuentes = async () => {
+export const getFuentes = () => {
   try {
-    const data = await request('fuentes.json')
+    const data = request('fuentes.json')
     return data
   } catch (error) {
     return error.response
   }
 }
 
-export const getTableros = async () => {
+export const getTableros = () => {
   try {
-    const data = await request('tableros.json')
+    const data = request('tableros.json')
     return data
   } catch (error) {
     return error.response
   }
 }
 
-export const getUsuarios = async () => {
+export const getUsuarios = () => {
   try {
-    const data = await request('usuarios.json')
+    const data = request('usuarios.json')
     return data
   } catch (error) {
     return error.response

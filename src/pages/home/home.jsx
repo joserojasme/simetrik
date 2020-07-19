@@ -9,71 +9,55 @@ import Usuarios from '../../components/tableUsuarios'
 import './styles.scss'
 
 function Home(props) {
-  const { conciliaciones, isLoading, fuentes, tableros, usuarios } = props
+  const { conciliaciones, fuentes, tableros, usuarios } = props
   useEffect(() => {
-    const fetchConciliaciones = async () => {
-      await props.setConciliaciones()
-    }
-    const fetchFuentes = async () => {
-      await props.setFuentes()
-    }
-    const fetchTableros = async () => {
-      await props.setTableros()
-    }
-    const fetchUsuarios = async () => {
-      await props.setUsuarios()
-    }
-    fetchConciliaciones()
-    fetchFuentes()
-    fetchTableros()
-    fetchUsuarios()
+    props.setConciliaciones()
+    props.setFuentes()
+    props.setTableros()
+    props.setUsuarios()
   }, [])
 
   return (
     <>
       <AppBarSearch />
       <FiltersOptions />
-      {!isLoading &&
-        <div className='root'>
-          <Grid container spacing={2}>
-            <Grid item xs={6} sm={3}>
-              <div className='paper_table'>
-                Conciliaciones
-              </div>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <div className='paper_table'>
-                Fuentes
-              </div>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <div className='paper_table'>
-                Tableros
-              </div>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <div className='paper_table'>
-                Usuarios
-              </div>
-            </Grid>
-            <Grid className='container_table' item xs={6} sm={3}>
-              <Conciliaciones data={conciliaciones} />
-            </Grid>
-            <Grid className='container_table' item xs={6} sm={3}>
-              <Fuentes data={fuentes} />
-            </Grid>
-            <Grid className='container_table' item xs={6} sm={3}>
-              <Tableros data={tableros} />
-            </Grid>
-            <Grid className='container_table' item xs={6} sm={3}>
-              <Usuarios data={usuarios} />
-            </Grid>
+      <div className='root'>
+        <Grid container spacing={2}>
+          <Grid item xs={6} sm={3}>
+            <div className='paper_table'>
+              Conciliaciones
+            </div>
           </Grid>
-        </div>
-      }
-      {isLoading &&
-        <img src='./loading.gif' alt='loading' />
-      }
+          <Grid item xs={6} sm={3}>
+            <div className='paper_table'>
+              Fuentes
+            </div>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <div className='paper_table'>
+              Tableros
+            </div>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <div className='paper_table'>
+              Usuarios
+            </div>
+          </Grid>
+          <Grid className='container_table' item xs={6} sm={3}>
+            <Conciliaciones data={conciliaciones} />
+          </Grid>
+          <Grid className='container_table' item xs={6} sm={3}>
+            <Fuentes data={fuentes} />
+          </Grid>
+          <Grid className='container_table' item xs={6} sm={3}>
+            <Tableros data={tableros} />
+          </Grid>
+          <Grid className='container_table' item xs={6} sm={3}>
+            <Usuarios data={usuarios} />
+          </Grid>
+        </Grid>
+      </div>
+
     </>
   )
 }

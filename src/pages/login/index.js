@@ -1,5 +1,5 @@
 import Login from './login'
-import { setIsLoading, setDataAlert } from '../../store/actions'
+import { setIsLoading, setDataAlert } from '../../store/actions/ActionsUtils'
 import { connect } from 'react-redux'
 
 const mapStateToProps = state => ({

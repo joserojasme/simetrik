@@ -88,7 +88,7 @@ class Login extends Component {
 	          <Avatar className='avatar'>
 	            <LockOutlinedIcon />
 	          </Avatar>
-	          <LabelTitle text="SIMETRIK TEST" />
+	          <LabelTitle text="Thunks" />
 	          <form onSubmit={this.handleSubmit}>
 	            <TextField
 	              variant="outlined"

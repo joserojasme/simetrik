@@ -10,12 +10,14 @@ const useStyles = makeStyles({
   table: {
     minWidth: 700,
     maxHeight: 440
+  },
+  span: {
+    fontFamily: 'Quicksand'
   }
 })
 
 export default function TableConciliaciones({ data }) {
   const classes = useStyles()
-
   return (
     <Table className={classes.table} aria-label="customized table">
       <TableHead>
@@ -40,6 +42,9 @@ export default function TableConciliaciones({ data }) {
               </StyledTableCell>
             </StyledTableRow>
           ))}
+        {data.length === 0 && (
+          <span className={classes.span}>No hay resultados</span>
+        )}
       </TableBody>
     </Table>
   )
